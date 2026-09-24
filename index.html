@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>WireGuard ⇄ Xray Converter</title>
+<meta name="description" content="Convert WireGuard .conf files to Xray wireguard outbound JSON and back. Runs entirely in your browser." />
+<meta name="color-scheme" content="dark" />
+<link rel="stylesheet" href="style.css" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>" />
+</head>
+<body>
+<div class="app">
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="dot" aria-hidden="true"></span>
+      <div>
+        <h1>WireGuard <span class="swap">⇄</span> Xray</h1>
+        <p class="sub">Convert <code>.conf</code> ⇄ <code>wireguard</code> outbound JSON — 100% in your browser.</p>
+      </div>
+    </div>
+
+    <div class="options">
+      <label class="field">
+        <span>Outbound tag</span>
+        <input id="opt-tag" type="text" value="wireguard-outbound" spellcheck="false" autocomplete="off" />
+      </label>
+      <label class="check"><input id="opt-extras" type="checkbox" checked /><span>streamSettings + mux</span></label>
+      <label class="check"><input id="opt-wrap" type="checkbox" /><span>wrap in <code>outbounds</code></span></label>
+    </div>
+  </header>
+
+  <main>
+    <section class="pane">
+      <div class="pane-head">
+        <span class="label">Source</span>
+        <div class="pane-actions">
+          <button class="ghost" type="button" data-copy="source">Copy</button>
+          <button class="ghost" type="button" data-clear="source">Clear</button>
+        </div>
+      </div>
+      <textarea id="source" spellcheck="false" autocomplete="off" autocapitalize="off"
+        placeholder="Paste a WireGuard [Interface]/[Peer] config here — or an Xray wireguard outbound JSON…"></textarea>
+    </section>
+
+    <div class="controls">
+      <button id="btn-wg2xray" class="btn" type="button">WireGuard → Xray</button>
+      <button id="btn-xray2wg" class="btn" type="button">Xray → WireGuard</button>
+    </div>
+
+    <section class="pane" id="output-pane">
+      <div class="pane-head">
+        <span class="label">Result</span>
+        <div class="pane-actions">
+          <button class="ghost" type="button" data-copy="output">Copy</button>
+          <button class="ghost" type="button" data-clear="output">Clear</button>
+        </div>
+      </div>
+      <textarea id="output" spellcheck="false" readonly placeholder="The converted result appears here…"></textarea>
+      <div class="notes" id="notes" hidden></div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <span>Nothing leaves your device — parsing happens locally.</span>
+    <span class="sep">•</span>
+    <a href="https://github.com/">Source</a>
+  </footer>
+
+</div>
+<script src="script.js"></script>
+</body>
+</html>

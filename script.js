@@ -152,6 +152,9 @@
 
     const settings = { address: address };
 
+    // ✅ FIX: actually put the private key into the output JSON
+    settings.secretKey = secretKey;
+
     // MTU
     let mtu = parseInt(iface.mtu, 10);
     if (!Number.isFinite(mtu) || mtu <= 0) {
@@ -174,6 +177,7 @@
       notes.push('wg-quick hook lines (PreUp/PostUp/PreDown/PostDown/SaveConfig) are not transferable to Xray.');
     }
 
+    // WARP reserved (only meaningful if you already have a WARP keypair)
     const reserved = parseReserved(iface.reserved);
     if (reserved) {
       settings.reserved = reserved;
